@@ -1,5 +1,5 @@
-# jwt-authenticator
-JWT Authenticator Component
+# jwt-authenticator-bundle
+JWT Authenticator Bundle
 
 ## Installation
 This component can be installed with the [Composer](https://getcomposer.org/) dependency manager.
@@ -10,8 +10,12 @@ This component can be installed with the [Composer](https://getcomposer.org/) de
 
         composer require free2er/jwt-authenticator
 
-3. Configure security settings
+3. Enable bundle
 
         TODO: not implemented yet
 
-4. Done!
+4. Configure security settings
+
+        TODO: not implemented yet
+
+5. Done!

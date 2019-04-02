@@ -1,6 +1,6 @@
 {
-    "name": "free2er/jwt-authenticator",
-    "description": "JWT Authenticator Component",
+    "name": "free2er/jwt-authenticator-bundle",
+    "description": "JWT Authenticator Bundle",
     "type": "library",
     "license": "MIT",
     "authors": [
