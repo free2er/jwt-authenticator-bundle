@@ -1,5 +1,11 @@
 .idea
 
+.phpcs-cache
+phpcs.xml
+
+.phpunit.result.cache
+phpunit.xml
+
 composer.phar
 /vendor/
 

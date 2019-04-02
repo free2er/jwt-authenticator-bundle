@@ -10,18 +10,29 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.1",
         "ext-json": "*",
-        "lcobucci/jwt": "^3.2"
+        "lcobucci/jwt": "^3.2",
+        "nesbot/carbon": "^2.16",
+        "symfony/http-foundation": "^4.2",
+        "symfony/security-core": "^4.2",
+        "symfony/security-guard": "^4.2"
     },
     "autoload": {
         "psr-4": {
-            "Free2er\\": "src/"
+            "Free2er\\Jwt\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Free2er\\": "tests/"
+            "Free2er\\Jwt\\": "tests/"
         }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "require-dev": {
+        "free2er/coding-standard": "^1.0",
+        "phpunit/phpunit": "^8.0"
     }
 }
