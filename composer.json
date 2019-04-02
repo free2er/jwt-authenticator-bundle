@@ -1,0 +1,27 @@
+{
+    "name": "free2er/jwt-authenticator",
+    "description": "JWT Authenticator Component",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Max Pryakhin",
+            "email": "m.pryakhin@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "lcobucci/jwt": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Free2er\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Free2er\\": "tests/"
+        }
+    }
+}
