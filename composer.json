@@ -14,7 +14,9 @@
         "ext-json": "*",
         "lcobucci/jwt": "^3.2",
         "nesbot/carbon": "^2.16",
-        "symfony/http-foundation": "^4.2",
+        "symfony/config": "^4.2",
+        "symfony/dependency-injection": "^4.2",
+        "symfony/http-kernel": "^4.2",
         "symfony/security-core": "^4.2",
         "symfony/security-guard": "^4.2"
     },

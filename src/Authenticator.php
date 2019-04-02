@@ -20,7 +20,7 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Throwable;
 
 /**
- * Аутентификатор по ключу JWT
+ * Аутентификатор
  */
 class Authenticator extends AbstractGuardAuthenticator
 {

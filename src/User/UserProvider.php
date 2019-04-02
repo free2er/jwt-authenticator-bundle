@@ -27,7 +27,7 @@ class UserProvider implements UserProviderInterface
      *
      * @param string $scopeKey
      */
-    public function __construct(string $scopeKey = 'scopes')
+    public function __construct(string $scopeKey)
     {
         $this->scopeKey = $scopeKey;
     }
