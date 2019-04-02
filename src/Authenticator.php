@@ -319,6 +319,6 @@ class Authenticator extends AbstractGuardAuthenticator
      */
     private function createUnauthorizedResponse(): Response
     {
-        return new Response(Response::HTTP_UNAUTHORIZED);
+        return new Response('', Response::HTTP_UNAUTHORIZED);
     }
 }
