@@ -9,6 +9,7 @@ use Free2er\Jwt\User\UserProvider;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -31,7 +32,7 @@ class JwtAuthenticatorExtension extends Extension
         $parser    = new Definition(Parser::class);
         $signer    = new Definition($config['algorithm']);
         $publicKey = new Definition(Signer\Key::class, [$config['public_key']]);
-        $logger    = $container->findDefinition(LoggerInterface::class);
+        $logger    = $this->getLogger($container);
 
         $container->setDefinition(UserProvider::class, new Definition(UserProvider::class, [$config['scope_key']]));
         $container->setDefinition(Authenticator::class, new Definition(Authenticator::class, [
@@ -40,5 +41,21 @@ class JwtAuthenticatorExtension extends Extension
             $publicKey,
             $logger,
         ]));
+    }
+
+    /**
+     * Возвращает логгер
+     *
+     * @param ContainerBuilder $container
+     *
+     * @return Definition
+     */
+    private function getLogger(ContainerBuilder $container): Definition
+    {
+        if ($container->hasAlias(LoggerInterface::class) || $container->hasDefinition(LoggerInterface::class)) {
+            return $container->findDefinition(LoggerInterface::class);
+        }
+
+        return new Definition(NullLogger::class);
     }
 }
