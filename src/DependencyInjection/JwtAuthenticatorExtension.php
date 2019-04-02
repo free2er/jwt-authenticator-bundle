@@ -26,7 +26,7 @@ class JwtAuthenticatorExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $config = $this->processConfiguration(new Configuration(),  $configs);
+        $config = $this->processConfiguration(new Configuration(), $configs);
 
         $parser    = new Definition(Parser::class);
         $signer    = new Definition($config['algorithm']);
