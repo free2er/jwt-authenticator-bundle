@@ -10,12 +10,45 @@ This component can be installed with the [Composer](https://getcomposer.org/) de
 
         composer require free2er/jwt-authenticator
 
-3. Enable bundle
+3. Enable the bundle
 
-        TODO: not implemented yet
+```php
+<?php
 
-4. Configure security settings
+// config/bundles.php
+return [
+    // ...
+    Free2er\Jwt\JwtAuthenticatorBundle::class => ['all' => true],
+    // ...
+];
+```
 
-        TODO: not implemented yet
+4. Configure the path to the public key
 
-5. Done!
+```yml
+# config/packages/jwt_authenticator.yaml
+jwt_authenticator:
+    public_key: file://%kernel.project_dir%/path/to/public.key
+```
+
+5. Configure the firewall
+
+```yml
+# config/packages/security.yaml
+security:
+    providers:
+        jwt:
+            id: Free2er\Jwt\User\UserProvider
+    firewalls:
+        # ...
+        main:
+            pattern: ^/api
+            stateless: true
+            provider: jwt
+            guard:
+                authenticators:
+                    - Free2er\Jwt\Authenticator
+        # ...
+```
+
+6. Done!
