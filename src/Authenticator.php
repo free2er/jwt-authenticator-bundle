@@ -10,7 +10,9 @@ use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Token;
 use Lcobucci\JWT\ValidationData;
 use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -25,6 +27,8 @@ use Throwable;
  */
 class Authenticator extends AbstractGuardAuthenticator implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /**
      * Парсер ключа JWT
      *
@@ -47,13 +51,6 @@ class Authenticator extends AbstractGuardAuthenticator implements LoggerAwareInt
     private $key;
 
     /**
-     * Логгер
-     *
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * Заголовок запроса
      *
      * @var string
@@ -70,17 +67,17 @@ class Authenticator extends AbstractGuardAuthenticator implements LoggerAwareInt
     /**
      * Конструктор
      *
-     * @param Parser          $parser
-     * @param Signer          $signer
-     * @param Signer\Key      $key
-     * @param LoggerInterface $logger
+     * @param Parser     $parser
+     * @param Signer     $signer
+     * @param Signer\Key $key
      */
-    public function __construct(Parser $parser, Signer $signer, Signer\Key $key, LoggerInterface $logger)
+    public function __construct(Parser $parser, Signer $signer, Signer\Key $key)
     {
         $this->parser = $parser;
         $this->signer = $signer;
         $this->key    = $key;
-        $this->logger = $logger;
+
+        $this->setLogger(new NullLogger());
     }
 
     /**
