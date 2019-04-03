@@ -283,7 +283,11 @@ class Authenticator extends AbstractGuardAuthenticator implements LoggerAwareInt
             $token = reset($token);
         }
 
-        return trim(preg_replace('/^(?:\s+)?Bearer\s/', '', (string) $token));
+        if (!preg_match('/^bearer\s+(?P<token>.+)/i', trim((string) $token), $match)) {
+            return '';
+        }
+
+        return (string) $match['token'];
     }
 
     /**
