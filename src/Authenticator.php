@@ -11,7 +11,6 @@ use Lcobucci\JWT\Token;
 use Lcobucci\JWT\ValidationData;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -71,17 +70,17 @@ class Authenticator extends AbstractGuardAuthenticator implements LoggerAwareInt
     /**
      * Конструктор
      *
-     * @param Parser               $parser
-     * @param Signer               $signer
-     * @param Signer\Key           $key
-     * @param LoggerInterface|null $logger
+     * @param Parser          $parser
+     * @param Signer          $signer
+     * @param Signer\Key      $key
+     * @param LoggerInterface $logger
      */
-    public function __construct(Parser $parser, Signer $signer, Signer\Key $key, LoggerInterface $logger = null)
+    public function __construct(Parser $parser, Signer $signer, Signer\Key $key, LoggerInterface $logger)
     {
         $this->parser = $parser;
         $this->signer = $signer;
         $this->key    = $key;
-        $this->logger = $logger ?: new NullLogger();
+        $this->logger = $logger;
     }
 
     /**
