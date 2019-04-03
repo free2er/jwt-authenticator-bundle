@@ -129,15 +129,7 @@ class Authenticator extends AbstractGuardAuthenticator implements LoggerAwareInt
      */
     public function supports(Request $request)
     {
-        if ($this->header && $request->headers->has($this->header)) {
-            return true;
-        }
-
-        if ($this->parameter && $request->query->has($this->parameter)) {
-            return true;
-        }
-
-        return false;
+        return (bool) $this->getToken($request);
     }
 
     /**
