@@ -8,7 +8,7 @@ This component can be installed with the [Composer](https://getcomposer.org/) de
 
 2. Install the component as a dependency of your project
 
-        composer require free2er/jwt-authenticator
+        composer require free2er/jwt-authenticator-bundle
 
 3. Enable the bundle
 
