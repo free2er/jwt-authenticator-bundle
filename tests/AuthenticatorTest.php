@@ -263,6 +263,67 @@ class AuthenticatorTest extends TestCase
     }
 
     /**
+     * Проверяет журналирование попыток аутентификации без ключа
+     */
+    public function testLogEmptyToken(): void
+    {
+        $this->authenticator->setLogger($this->logger);
+        $this->authenticator->getCredentials($this->request);
+
+        $this->assertEquals('alert', $this->logger->records[0]['level'] ?? null);
+        $this->assertEquals('JWT not found', $this->logger->records[0]['message'] ?? null);
+    }
+
+    /**
+     * Проверяет журналирование попыток аутентификации по некорректному ключу
+     */
+    public function testLogInvalidToken(): void
+    {
+        $this->request->query->set('token', 'some.invalid.jwt');
+
+        $this->authenticator->setLogger($this->logger);
+        $this->authenticator->getCredentials($this->request);
+
+        $this->assertEquals('error', $this->logger->records[0]['level'] ?? null);
+        $this->assertEquals('JWT error', $this->logger->records[0]['message'] ?? null);
+        $this->assertEquals('some.invalid.jwt', $this->logger->records[0]['context']['jwt'] ?? null);
+    }
+
+    /**
+     * Проверяет журналирование попыток аутентификации по просроченному ключу
+     */
+    public function testLogExpiredToken(): void
+    {
+        $this->expiration = $this->now - 1;
+
+        $token = (string) $this->createJwt();
+        $this->request->query->set('token', $token);
+
+        $this->authenticator->setLogger($this->logger);
+        $this->authenticator->getCredentials($this->request);
+
+        $this->assertEquals('alert', $this->logger->records[0]['level'] ?? null);
+        $this->assertEquals('JWT expired', $this->logger->records[0]['message'] ?? null);
+        $this->assertEquals($token, $this->logger->records[0]['context']['jwt'] ?? null);
+    }
+
+    /**
+     * Проверяет журналирование попыток аутентификации по ключу неизвестного сервера авторизации
+     */
+    public function testLogUntrustedToken(): void
+    {
+        $token = (string) $this->createJwt('untrusted');
+        $this->request->query->set('token', $token);
+
+        $this->authenticator->setLogger($this->logger);
+        $this->authenticator->getCredentials($this->request);
+
+        $this->assertEquals('alert', $this->logger->records[0]['level'] ?? null);
+        $this->assertEquals('JWT signature verification failed', $this->logger->records[0]['message'] ?? null);
+        $this->assertEquals($token, $this->logger->records[0]['context']['jwt'] ?? null);
+    }
+
+    /**
      * Проверяет аутентификацию
      *
      * @throws Throwable
