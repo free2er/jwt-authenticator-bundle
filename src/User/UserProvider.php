@@ -37,7 +37,7 @@ class UserProvider implements UserProviderInterface
      *
      * @param Token|string $token
      *
-     * @return UserInterface
+     * @return User
      *
      * @throws UsernameNotFoundException
      */
@@ -55,7 +55,7 @@ class UserProvider implements UserProviderInterface
      *
      * @param UserInterface $user
      *
-     * @return UserInterface
+     * @return User
      *
      * @throws UnsupportedUserException
      */
