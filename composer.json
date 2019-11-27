@@ -9,17 +9,6 @@
             "email": "m.pryakhin@gmail.com"
         }
     ],
-    "require": {
-        "php": "^7.1",
-        "ext-json": "*",
-        "lcobucci/jwt": "^3.2",
-        "nesbot/carbon": "^2.16",
-        "symfony/config": "^4.2",
-        "symfony/dependency-injection": "^4.2",
-        "symfony/http-kernel": "^4.2",
-        "symfony/security-core": "^4.2",
-        "symfony/security-guard": "^4.2"
-    },
     "autoload": {
         "psr-4": {
             "Free2er\\Jwt\\": "src/"
@@ -30,11 +19,23 @@
             "Free2er\\Jwt\\": "tests/"
         }
     },
-    "config": {
-        "sort-packages": true
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "lcobucci/jwt": "^3.3",
+        "nesbot/carbon": "^2.27",
+        "sensio/framework-extra-bundle": "^5.5",
+        "symfony/config": "^4.3 || ^5.0",
+        "symfony/dependency-injection": "^4.3 || ^5.0",
+        "symfony/http-kernel": "^4.3 || ^5.0",
+        "symfony/security-core": "^4.3 || ^5.0",
+        "symfony/security-guard": "^4.3|| ^5.0"
     },
     "require-dev": {
-        "free2er/coding-standard": "^1.0",
-        "phpunit/phpunit": "^8.0"
+        "free2er/coding-standard": "^1.1",
+        "phpunit/phpunit": "^8.3"
+    },
+    "config": {
+        "sort-packages": true
     }
 }

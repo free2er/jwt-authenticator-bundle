@@ -1,0 +1,24 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    # Преобразователи параметров
+    Free2er\Jwt\ParamConverter\:
+        resource: '../../ParamConverter'
+
+    # Сервисы
+    Free2er\Jwt\Service\:
+        resource: '../../Service'
+
+    # Условия доступа
+    Free2er\Jwt\Voter\:
+        resource: '../../Voter'
+        tags: ['security.voter']
+
+    # Провайдер пользователей
+    Free2er\Jwt\Service\UserProvider:
+        arguments:
+            - '@jwt_authenticator.signer'
+            - '@jwt_authenticator.key'
+            - '%jwt_authenticator.roles%'

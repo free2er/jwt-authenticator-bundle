@@ -28,7 +28,7 @@ return [
 ```yml
 # config/packages/jwt_authenticator.yaml
 jwt_authenticator:
-    public_key: file://%kernel.project_dir%/path/to/public.key
+    key: file://%kernel.project_dir%/path/to/public.key
 ```
 
 5. Configure the firewall
@@ -38,7 +38,7 @@ jwt_authenticator:
 security:
     providers:
         jwt:
-            id: Free2er\Jwt\User\UserProvider
+            id: Free2er\Jwt\Service\UserProvider
     firewalls:
         # ...
         main:
@@ -47,7 +47,7 @@ security:
             provider: jwt
             guard:
                 authenticators:
-                    - Free2er\Jwt\Authenticator
+                    - Free2er\Jwt\Service\Authenticator
         # ...
 ```
 
