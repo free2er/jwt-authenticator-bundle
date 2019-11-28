@@ -37,5 +37,9 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "scripts": {
+        "lint": "vendor/bin/phpcs",
+        "test": "vendor/bin/phpunit"
     }
 }
